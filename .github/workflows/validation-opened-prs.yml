@@ -2,6 +2,8 @@ name: Validation Opened PRs
 
 on:
   pull_request:
+    branches:
+      - joon6093
     types:
       - opened
       - synchronize
