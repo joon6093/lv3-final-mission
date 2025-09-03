@@ -1,1 +1,21 @@
 # lv3-final-mission
+
+- AWS EC2 인스턴스를 사용하여 애플리케이션을 배포했습니다.
+    - 프리티어 범위 내에서 자원을 활용하여 비용을 최소화했습니다.
+- 애플리케이션은 Spring Boot 기반이며 Docker 컨테이너로 실행됩니다.
+    - 배포 자동화는 현재 프로젝트 규모에서 과하다고 판단하였고, 인간 배포로도 충분히 관리할 수 있다고 생각하여 구축하지 않았습니다.
+    - 대신 DockerHub에 이미지를 올려 관리함으로써, `git clone`이나 JAR 파일 복사 같은 수동 작업을 줄였습니다.
+    - 대신 검증 자동화는 필요하다고 생각하여 GitHub Actions로 PR마다 테스트가 실행되도록 설정했습니다.
+- DNS는 DuckDNS의 무료 서브도메인을 사용했습니다.
+    - 퍼블릭 도메인을 확보하면서도 도메인 비용은 들이지 않았습니다.
+- HTTPS는 Nginx를 두지 않고 Spring Boot 자체 SSL 설정으로 적용했습니다.
+    - 작은 규모에서는 Nginx 비용과 복잡성을 줄이는 것이 낫다고 판단했습니다.
+    - Certbot과 Let’s Encrypt로 인증서를 발급받아 keystore로 변환 후 적용했습니다.
+- 데이터베이스는 AWS RDS를 활용했습니다.
+    - 역시 프리티어 범위 내에서 사용하여 비용을 최소화했습니다.
+- 모니터링은 AWS CloudWatch Logs와 Metrics를 사용했습니다.
+    - EC2 안에서 로그 확인은 불편하기 때문에 CloudWatch Logs로 수집했습니다.
+    - 성능 분석과 장애 대응을 위해 CloudWatch Metrics를 연결했고, Dashboard도 만들어 한눈에 볼 수 있게 했습니다.
+    - 무엇보다 제 정신 건강을 위해 꼭 필요하다고 생각했습니다.
+- Docker 실행 시 AWS CloudWatch Logs 드라이버를 활용해 애플리케이션 로그를 바로 CloudWatch로 보냈습니다.
+    - logback 세부 설정 대신 Docker 로그 드라이버를 사용해 복잡성을 낮췄습니다.  
