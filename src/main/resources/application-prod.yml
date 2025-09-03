@@ -1,3 +1,8 @@
+server:
+  tomcat:
+    mbean-registry:
+      enabled: true
+
 spring:
   config:
     import:
@@ -43,7 +48,6 @@ management:
       http.server.requests: true
       tomcat.threads: true
       app.health.status: true
-      executor: true
       hikaricp.connections.active: true
       hikaricp.connections.pending: true
       hikaricp.connections.max: true
