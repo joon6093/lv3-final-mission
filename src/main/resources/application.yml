@@ -1,0 +1,26 @@
+server:
+  port: 8080
+  tomcat:
+    mbean-registry:
+      enabled: true
+
+spring:
+  profiles:
+    default: local
+
+management:
+  metrics:
+    enable:
+      all: false
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+    jmx:
+      exposure:
+        exclude: '*'
+
+springdoc:
+  swagger-ui:
+    path: /specification
