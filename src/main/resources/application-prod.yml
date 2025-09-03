@@ -1,4 +1,13 @@
 server:
+  port: 443
+
+  ssl:
+    enabled: true
+    key-store: /home/ubuntu/keystore.p12
+    key-store-type: PKCS12
+    key-alias: tomcat
+    key-store-password: ${ssl.prod.password}
+
   tomcat:
     mbean-registry:
       enabled: true
@@ -7,6 +16,7 @@ spring:
   config:
     import:
       - security/db.yml
+      - security/ssl.yml
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
